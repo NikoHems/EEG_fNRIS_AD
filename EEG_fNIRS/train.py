@@ -41,8 +41,11 @@ class Trainer(HyperParameters):
     def fit_epoch(self):
         self.model.train()
 
+        total_loss = 0
+
         for batch in self.train_dataloader:
             loss = self.model.training_step(self.prepare_batch(batch), self.draw_online, self.img_path)
+            total_loss += loss.item()
             self.optim.zero_grad()
             with torch.no_grad():
                 loss.backward()
@@ -51,15 +54,21 @@ class Trainer(HyperParameters):
                 self.optim.step()
             self.train_batch_idx += 1
         
+        print(f"Epoch {self.epoch + 1} - Training Loss: {total_loss / len(self.train_dataloader)}")
+
         if self.val_dataloader is None:
             return
         
         self.model.eval()
+        total_val_loss = 0
 
         for batch in self.val_dataloader:
             with torch.no_grad():
-                self.model.validation_step(self.prepare_batch(batch), self.draw_online, self.img_path)
+                loss = self.model.validation_step(self.prepare_batch(batch), self.draw_online, self.img_path)
+                total_val_loss += loss
             self.val_batch_idx += 1
+
+        print(f"Epoch {self.epoch + 1} - Validation Loss: {total_val_loss / len(self.val_dataloader)}")
 
     def validate(self):
         self.model.eval()

@@ -58,19 +58,20 @@ class Module(nn.Module, HyperParameters):
 
     def training_step(self, batch, draw_online=True, img_path=None):
         l = self.loss(self(*batch[:-1]), batch[-1]) # self(*batch[:-1]) call Module(), and calculate the prediction
-        self.plot('loss', l, train=True, draw_online=draw_online, img_path=img_path)
+        # self.plot('loss', l, train=True, draw_online=draw_online, img_path=img_path)
         return l
     
     def validation_step(self, batch, draw_online=True, img_path=None):
         l = self.loss(self(*batch[:-1]), batch[-1])
-        self.plot('loss', l, train=False, draw_online=draw_online, img_path=img_path)
+        # self.plot('loss', l, train=False, draw_online=draw_online, img_path=img_path)
+        return l
 
     def configure_optimizers(self):
         raise NotImplementedError
     
 
 class MLPClassifier(Module):
-    def __init__(self, input_dim, hidden_dim, output_dim, lr=0.01):
+    def __init__(self, input_dim, hidden_dim, output_dim, lr=0.001):
         super().__init__()
         self.lr = lr
         self.net = nn.Sequential(
@@ -79,6 +80,8 @@ class MLPClassifier(Module):
             nn.Linear(hidden_dim, output_dim)
         )
         self.save_hyperparameters()
+        print(f"Model architecture:\n{self.net}")
+        print(f"Output layer dimension: {self.net[-1].out_features}")
 
     def loss(self, y_hat, y):
         fn = nn.CrossEntropyLoss()
@@ -88,23 +91,4 @@ class MLPClassifier(Module):
         return torch.optim.Adam(self.parameters(), lr=self.lr)
     
 
-class SimpleClassifier(Module):
-    def __init__(self, input_size, num_classes):
-        super(SimpleClassifier, self).__init__()
-        self.fc1 = nn.Linear(input_size, 128)
-        self.relu = nn.ReLU()
-        self.fc2 = nn.Linear(128, num_classes)
-
-    def forward(self, x):
-        x = self.fc1(x)
-        x = self.relu(x)
-        x = self.fc2(x)
-        return x
-    
-    def loss(self, y_hat, y):
-        fn = nn.CrossEntropyLoss()
-        return fn(y_hat, y)
-    
-    def configure_optimizers(self):
-        return torch.optim.Adam(self.parameters(), lr=0.01)
     

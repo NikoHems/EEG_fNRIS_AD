@@ -90,3 +90,6 @@ Unlike EEG, which directly measures the brain's electrical activity, fNIRS <u>in
 
 - Frequency domain analysis using PSD:
   - 
+
+
+
