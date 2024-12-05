@@ -1,4 +1,4 @@
-# Alzheimers DIsease Prediction using EEG & fNRIS data
+# Alzheimers Disease Prediction using EEG & fNRIS Data
 
 The repository "EEG_fNRIS_AD" is a project from UC Berkeley's Introduction to Neurotechnology course. It focuses on analyzing EEG (Electroencephalography) and fNIRS (Functional Near-Infrared Spectroscopy) data to detect early signs of Alzheimer's Disease (AD). The project employs machine learning techniques to identify biomarkers indicative of cognitive decline, aiming to facilitate early diagnosis and personalized interventions.
 
