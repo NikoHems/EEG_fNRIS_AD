@@ -1,79 +1,55 @@
-# Alzheimer's Disease Prediction Using EEG Data
+# Alzheimers Disease Prediction using EEG & fNRIS Data
 
-This project aims to classify Alzheimer’s Disease (AD) presence using EEG band power features. It compares multiple machine learning models (Random Forest, XGBoost, and SVM) to predict AD status based on processed EEG data.
+The repository "EEG_fNRIS_AD" is a project from UC Berkeley's Introduction to Neurotechnology course. It focuses on analyzing EEG (Electroencephalography) and fNIRS (Functional Near-Infrared Spectroscopy) data to detect early signs of Alzheimer's Disease (AD). The project employs machine learning techniques to identify biomarkers indicative of cognitive decline, aiming to facilitate early diagnosis and personalized interventions.
 
-## Project Overview
+## Repository Structure
 
-### Data
-The dataset used in this project can be found [here on OSF](https://osf.io/s74qf/). It consists of EEG recordings from four groups:
-- **Group A**: Healthy elderly subjects, eyes open
-- **Group B**: Healthy elderly subjects, eyes closed
-- **Group C**: Probable AD patients, eyes open
-- **Group D**: Probable AD patients, eyes closed
+The repository is organized as follows:
 
-Each EEG recording is transformed into features representing power in delta, theta, alpha, and beta frequency bands, with additional band ratios added for enhanced prediction.
+- **DataBase/**: Contains datasets used for analysis.
+- **EEG_fNIRS/**: Includes scripts and resources related to EEG and fNIRS data processing.
+- **model.ipynb**: A Jupyter Notebook detailing the machine learning model development and evaluation.
+- **requirements.txt**: Lists the Python dependencies required to run the project.
+- **.gitignore**: Specifies files and directories to be ignored by Git.
+- **LICENSE**: The project's licensing information.
+- **README.md**: Provides an overview and documentation of the project.
 
-### Workflow
-1. **Data Preprocessing**: Band power calculation and feature engineering to add band ratios.
-2. **Modeling**: 
-    - Use of pipelines to prevent data leakage and streamline preprocessing.
-    - Three models are compared using cross-validation: Random Forest, XGBoost, and SVM (with RBF kernel).
-3. **Evaluation**:
-    - Cross-validation to select the best-performing model.
-    - Final evaluation on a held-out test set, with a confusion matrix visualization.
+## Installation
 
-## Requirements
+To set up the project locally:
 
-Install all dependencies with:
+1. **Clone the repository**:
 
-```bash
-pip install -r requirements.txt
-```
+   ```bash
+   git clone https://github.com/NikoHems/EEG_fNRIS_AD.git
+   cd EEG_fNRIS_AD
+   ```
 
-## Project Structure
+2. **Install the required dependencies**:
 
-- **data/**: Folder containing raw EEG data files.
-- **notebooks/**: Jupyter notebooks for each step in the analysis.
-- **src/**: Source code for feature engineering, model building, and evaluation.
-- **README.md**: Project documentation.
-- **requirements.txt**: Dependencies for reproducibility.
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Getting Started
+## Usage
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/alzheimers-eeg-prediction.git
-    cd alzheimers-eeg-prediction
-    ```
+1. **Data Preprocessing**:
 
-2. Install required packages:
-    ```bash
-    pip install -r requirements.txt
-    ```
+   - Navigate to the `EEG_fNIRS/` directory for scripts related to data preprocessing.
+   - Ensure that the datasets are correctly placed in the `DataBase/` directory.
 
-3. Run the main analysis script or open the notebooks in `notebooks/` for interactive exploration.
+2. **Model Training and Evaluation**:
 
-## Analysis Steps
+   - Open the `model.ipynb` Jupyter Notebook to follow the steps for training and evaluating the machine learning models.
 
-### 1. Data Preprocessing
-Each EEG signal undergoes:
-- Band-pass filtering to isolate delta, theta, alpha, and beta frequencies.
-- Power calculation for each band, with additional ratios like theta/alpha and theta/beta for enhanced feature representation.
+## Contributions
 
-### 2. Model Building
-Three models were tested:
-- **Random Forest** (no scaling needed).
-- **XGBoost** and **SVM**: Both use pipelines with standard scaling to ensure consistent performance.
-
-### 3. Evaluation
-Models are evaluated using 5-fold cross-validation, and the best-performing model is selected for final evaluation on a held-out test set. The final model’s performance is visualized using a confusion matrix.
-
-## Results
-The project concludes with the best model’s accuracy on the test set, confusion matrix visualization, and detailed evaluation metrics.
+Contributions to enhance the project are welcome. Please fork the repository, create a new branch for your feature or bug fix, and submit a pull request for review.
 
 ## License
-This project is licensed under the MIT License.
 
-## Acknowledgments
-Special thanks to the Alzheimer's research community for providing guidance on EEG band analysis for AD prediction.
+This project is licensed under the MIT License. Refer to the `LICENSE` file for more information.
 
+## Contact
+
+For questions or collaboration opportunities, please open an issue in the repository or contact the project maintainers directly.
